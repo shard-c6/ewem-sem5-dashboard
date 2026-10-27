@@ -1,0 +1,231 @@
+<title>EWEM Semester 5 Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column. Student strip, hero with the recovery cycle, counts, the assignment archive (filter, sort, mark done), linked work, learning themes. */
+:root{
+  --bg:#f6f6f2; --surface:#ffffff; --ink:#16201b; --muted:#5f6b64; --faint:#8b958f; --line:#e1e4de;
+  --accent:#2e6b52; --accent-soft:#e6efe9; --ese:#3b5a8c; --ese-soft:#e7ecf5;
+  --display:"Fraunces",Georgia,serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111613; --surface:#171d19; --ink:#e7ebe8; --muted:#a3ada7; --faint:#77817b; --line:#27302b;
+  --accent:#7fc3a3; --accent-soft:#1c2b24; --ese:#9db3e0; --ese-soft:#1f2636; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111613; --surface:#171d19; --ink:#e7ebe8; --muted:#a3ada7; --faint:#77817b; --line:#27302b;
+  --accent:#7fc3a3; --accent-soft:#1c2b24; --ese:#9db3e0; --ese-soft:#1f2636; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:24px;padding-block:28px 80px;display:grid;gap:72px}
+.student{display:flex;flex-wrap:wrap;gap:8px 28px;font-family:var(--mono);font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:16px}
+.student b{color:var(--ink);font-weight:500}
+.hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:center}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,6vw,68px);line-height:1.02;margin:12px 0 18px;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--muted);max-width:52ch;margin:0 0 28px;font-size:17px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font:500 14px var(--body);padding:10px 18px;border-radius:999px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cycle{width:100%;max-width:340px;justify-self:center}
+.cycle text{font-family:var(--mono);font-size:11px;fill:var(--muted);letter-spacing:.08em}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:22px 0 20px;display:grid;gap:2px}
+.stats div+div{padding-left:24px;border-left:1px solid var(--line)}
+.stats b{font-family:var(--display);font-weight:300;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--muted)}
+h2{font-family:var(--display);font-weight:400;font-size:34px;margin:6px 0 0;letter-spacing:-.01em}
+section{display:grid;gap:24px}
+.sub{color:var(--muted);margin:0;font-size:15px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.seg{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.seg button{font:500 13px var(--body);border:0;background:none;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.prog{font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.prog i{display:block;width:120px;height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.prog i em{display:block;height:100%;background:var(--accent);width:0}
+.list{display:grid;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
+.num{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:4px}
+.num span{display:inline-block;margin-top:6px;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:999px}
+.isa{background:var(--accent-soft);color:var(--accent)} .ese{background:var(--ese-soft);color:var(--ese)}
+.item h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.005em}
+.item p{margin:4px 0 10px;color:var(--muted);font-size:15px;max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:4px}
+.side{display:grid;gap:10px;justify-items:end;text-align:right}
+.side a{font-size:13px;color:var(--accent);text-underline-offset:3px;white-space:nowrap}
+.done{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.done input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.item.is-done h3{color:var(--muted)}
+.work{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
+.card h3{margin:0;font-family:var(--mono);font-size:14px;font-weight:500;word-break:break-word}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.card .for{font-size:13px;color:var(--ink)}
+.card .links{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+.card a{color:var(--accent);text-underline-offset:3px}
+.note{font-size:12px;color:var(--faint)}
+.themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.themes div{border-top:2px solid var(--ink);padding-top:16px}
+.themes h3{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:22px}
+.themes p{margin:0;color:var(--muted);font-size:15px}
+footer{font-size:13px;color:var(--faint);border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:12px;color:var(--faint);margin:2px 0 10px}
+.meta b{color:var(--muted);font-weight:500}
+.files{display:grid;gap:6px;margin-top:12px;padding:0;list-style:none}
+.files li{display:flex;gap:10px;align-items:baseline;font-size:14px;min-width:0}
+.files li span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--faint);width:38px;flex:none}
+.files li code,.files li a{font-family:var(--mono);font-size:13px;word-break:break-all}
+.files li a{color:var(--accent);text-underline-offset:3px}
+.status{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.st-in{background:var(--accent-soft);color:var(--accent)}
+.st-ready{background:var(--ese-soft);color:var(--ese)}
+.st-check{background:#fbeee0;color:#9a5a12}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .st-check{background:#3a2a16;color:#f0b46b}}
+:root[data-theme="dark"] .st-check{background:#3a2a16;color:#f0b46b}
+@media (max-width:820px){
+  .hero{grid-template-columns:minmax(0,1fr)} .cycle{max-width:260px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))} .stats div:nth-child(3){padding-left:0;border-left:0}
+  .stats div:nth-child(n+3){border-top:1px solid var(--line)}
+  .work,.themes{grid-template-columns:minmax(0,1fr)}
+  .item{grid-template-columns:minmax(0,1fr)} .side{justify-items:start;text-align:left;grid-auto-flow:column;justify-content:start;gap:20px}
+}
+@media (prefers-reduced-motion:no-preference){.cycle .spin{transform-origin:170px 170px;animation:spin 60s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}}
+</style>
+
+<div class="wrap">
+  <div class="student"><span><b>Shardul Chogale</b></span><span>Class <b>TE CMPN A</b></span><span>Roll no <b>24102A0021</b></span><span>Vidyalankar Institute of Technology</span><span>E-Waste Management · Semester 5</span></div>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Semester 5 archive</div>
+      <h1>E-Waste Management assignments</h1>
+      <p class="lede">Every ISA and ESE activity from the term: tracking e-waste across a state, how it is recovered, the rules companies follow, and how campuses can act on it.</p>
+      <div class="actions"><a class="btn primary" href="#archive">See assignments</a><a class="btn" href="#work">Linked projects</a></div>
+    </div>
+    <svg class="cycle" viewBox="0 0 340 340" role="img" aria-label="The e-waste recovery cycle: collect, dismantle, recover, reuse">
+      <g class="spin">
+        <circle cx="170" cy="170" r="120" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <path d="M170 50 A120 120 0 0 1 290 170" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <path d="M290 170 A120 120 0 0 1 170 290" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".7"/>
+        <path d="M170 290 A120 120 0 0 1 50 170" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".45"/>
+        <path d="M50 170 A120 120 0 0 1 170 50" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".25"/>
+        <circle cx="170" cy="50" r="5" fill="var(--accent)"/><circle cx="290" cy="170" r="5" fill="var(--accent)"/><circle cx="170" cy="290" r="5" fill="var(--accent)"/><circle cx="50" cy="170" r="5" fill="var(--accent)"/>
+      </g>
+      <text x="170" y="34" text-anchor="middle">COLLECT</text>
+      <text x="306" y="174" text-anchor="start">DISMANTLE</text>
+      <text x="170" y="316" text-anchor="middle">RECOVER</text>
+      <text x="34" y="174" text-anchor="end">REUSE</text>
+      <text x="170" y="166" text-anchor="middle" style="font-size:12px;fill:var(--ink)">11 activities</text>
+      <text x="170" y="184" text-anchor="middle">one cycle</text>
+    </svg>
+  </header>
+
+  <div class="stats" aria-label="Summary">
+    <div><b>11</b><span>Assignments</span></div>
+    <div><b>4</b><span>ISA activities</span></div>
+    <div><b>7</b><span>ESE activities</span></div>
+    <div><b id="doneCount">0</b><span>Hand-ins confirmed</span></div>
+  </div>
+
+  <section id="archive" aria-labelledby="arch-h">
+    <div>
+      <div class="eyebrow">The archive</div>
+      <h2 id="arch-h">All assignments</h2>
+      <p class="sub">In the order they were set, Assignment 0 to Assignment 10.</p>
+    </div>
+    <div class="bar">
+      <div class="seg" role="group" aria-label="Filter by category">
+        <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+        <button type="button" id="f-isa" data-f="isa" aria-pressed="false">ISA</button>
+        <button type="button" id="f-ese" data-f="ese" aria-pressed="false">ESE</button>
+      </div>
+      <div class="seg" role="group" aria-label="Sort">
+        <button type="button" id="s-order" data-s="order" aria-pressed="true">Original order</button>
+        <button type="button" id="s-az" data-s="az" aria-pressed="false">Title A–Z</button>
+      </div>
+      <div class="prog"><i><em id="progBar"></em></i><span id="progText"></span></div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div>
+      <div class="eyebrow">On GitHub</div>
+      <h2 id="work-h">Linked projects</h2>
+    </div>
+    <div class="work">
+      <article class="card">
+        <h3>EWEM_Dashboard</h3>
+        <p>Sikkim's e-waste sector in 10 panels, from the state baseline to a performance rating: 73.0 MT a year, ranked 3rd nationally.</p>
+        <div class="for">Assignment 1 and 3</div>
+        <div class="links"><a href="https://shard-c6.github.io/EWEM_Dashboard/" target="_blank" rel="noopener">Open dashboard</a><a href="https://github.com/shard-c6/EWEM_Dashboard" target="_blank" rel="noopener">Repository</a></div>
+      </article>
+      <article class="card">
+        <h3>ewem-unlearning-paper</h3>
+        <p>IEEE-format paper on checking that models really forget deleted personal data under the DPDP Act and GDPR.</p>
+        <div class="for">Assignment 10</div>
+        <div class="links"><a href="https://github.com/shard-c6/ewem-unlearning-paper" target="_blank" rel="noopener">Repository</a></div>
+        <span class="note">Private repository</span>
+      </article>
+      <article class="card">
+        <h3>EWaste_GDP_Dashboard</h3>
+        <p>E-waste generated against GDP for each country, 2015–2024, with a year slider and high/low waste groups.</p>
+        <div class="for">Assignment 7</div>
+        <div class="links"><a href="https://shard-c6.github.io/EWaste_GDP_Dashboard/" target="_blank" rel="noopener">Open dashboard</a><a href="https://github.com/shard-c6/EWaste_GDP_Dashboard" target="_blank" rel="noopener">Repository</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="themes-h">
+    <div>
+      <div class="eyebrow">What ties it together</div>
+      <h2 id="themes-h">Three ideas behind every submission</h2>
+    </div>
+    <div class="themes">
+      <div><h3>Recovery</h3><p>Copper, gold and rare earths are worth getting back. Collection and dismantling decide how much is.</p></div>
+      <div><h3>Regulation</h3><p>The E-Waste (Management) Rules make producers responsible for what their products become.</p></div>
+      <div><h3>Responsibility</h3><p>Campaigns, green buildings and better habits turn rules into what people actually do.</p></div>
+    </div>
+  </section>
+
+  <footer><span>ISA: In-Semester Assessment · ESE: End-Semester Examination</span><span>Status from Microsoft Teams, checked 27 October 2026</span></footer>
+</div>
+
+<script>
+// [no, cat, title, brief, tags, due, handedIn, points, status, files[[kind,label,url?]]]
+const A=[
+ [0,"isa","Assignment Zero: Check AAP","Course insights for E-waste & Environmental Management (VEC02), answered from the AAP: buckets, credits, prerequisites and preparation.",["Course insights","AAP"],null,null,null,"in",[["PDF","Assignment_0_ShardulChogale.docx.pdf"]]],
+ [1,"isa","State E-Waste Tracker","Sikkim's e-waste sector: an Excel data tracker, a state report for FY2025-26 and a 10-panel dashboard (73.0 MT a year, ranked 3rd nationally).",["Sikkim","Excel","Report","Dashboard"],"29 Jul 2026, 23:59","29 Jul 2026, 23:29",10,"in",[["XLSX","Sikkim_EWaste_Dashboard_Data.xlsx"],["DOCX","Sikkim_State_EWaste_Management_Report_FY2025-26.docx"],["HTML","sikkim_e_waste_sdg_dashboard.html"],["LINK","Live dashboard","https://shard-c6.github.io/EWEM_Dashboard/"]]],
+ [2,"isa","Elemental Blueprint","In-class activity on the elements that make up electronic waste.",["Materials","In class"],null,null,null,"in",[["PNG","ShardulChogale_24102A0021_Elemental-Blueprint.png"]]],
+ [3,"isa","PPT Upload for State-wise E-Waste Tracker","Presentation of the Sikkim state tracker, 15 slides.",["Presentation","Sikkim"],"10 Aug 2026, 21:00",null,10,"in",[["PDF","24102A0021_SikkimState.pdf"]]],
+ [4,"ese","Changes in the E-Waste Recovery Process","A patent-style idea: an adaptive closed-loop hydrogen recycling system that recovers NdFeB permanent magnets from e-waste, with an infographic on hydrogen decrepitation.",["Hydrogen decrepitation","NdFeB magnets","Patent idea"],"17 Aug 2026, 22:00","17 Aug 2026, 15:12",10,"in",[["PDF","Adaptive_Closed_Loop_Hydrogen_Recycling_Patent_Idea.pdf"],["PNG","Hydrogen Decrepitation infographic"]]],
+ [5,"ese","Indian Companies Following E-Waste Rules","E-waste and EPR compliance assessment of India's leading electronics manufacturers (group paper with Rishabh Hatlunkar, Rahul Bansode and Mukta Varak), plus an interactive web app.",["EPR","CPCB","5 companies"],null,null,null,"in",[["PDF","law-relating-to-e-waste-its-impacts-v2.pdf"],["LINK","Eco Target Buddy web app","https://eco-target-buddy.lovable.app/"]]],
+ [6,"ese","New Start-up Ideas: E-Waste Rules and Regulations Comparison","A comparison of e-waste regulation in India, the US, Australia, Russia and Japan, and a start-up pitch: Digital Harvest, gamifying sustainable agriculture in Kerala (SIH25075).",["Regulation","5 countries","Start-up"],"6 Sep 2026, 22:00",null,10,"in",[["PDF","Global E-Waste Regulations_ Comparative Study.pdf"],["PDF","Digital_Harvest_Kerala.pdf"]]],
+ [7,"ese","E-Waste Campaign in College","Campaign \u201cGDP vs E-Waste: Don't throw it. Pass it on.\u201d: a poster and a dashboard on wealth and e-waste, pushing a college platform to pass on old devices.",["Campaign","Campus","Reuse"],null,null,null,"in",[["PNG","GDP vs E-Waste campaign poster"],["MP4","0908.mp4 (campaign video)"],["LINK","GDP vs E-Waste dashboard","https://shard-c6.github.io/EWaste_GDP_Dashboard/"]]],
+ [8,"ese","LEED Certification in India","Rating the Suzlon building against LEED v5 BD+C using the course PDF, with a scoring tracker.",["LEED v5","Suzlon","Green buildings"],"23 Sep 2026, 23:59","22 Sep 2026, 12:50",10,"in",[["XLSX","Suzlon Building LEED v5 Rating Tracker-2.xlsx"],["LINK","Suzlon LEED v5 tracker (Google Sheets)","https://docs.google.com/spreadsheets/d/10UYkV7uSdk0yJKZ-xBLv90AVGzd8uFHL1LdUSFoFqtk/edit"]]],
+ [9,"ese","Case Studies Submission","The Urban Mine Blueprint: synthesising global e-waste mechanisms for India's circular economy. Basis for MSE 2.",["Case studies","Circular economy","MSE 2"],"4 Oct 2026, 23:59","29 Sep 2026, 13:07",20,"in",[["PDF","The_Urban_Mine_Blueprint.pdf"]]],
+ [10,"ese","IEEE Paper Submission","In-class IEEE-format paper: membership-inference certificates for verifying machine unlearning under the DPDP Act and GDPR.",["IEEE format","Research"],null,null,null,"in",[["PDF","paper.pdf"],["LINK","Paper repository (private)","https://github.com/shard-c6/ewem-unlearning-paper"]]]
+];
+const ST={in:["Handed in","st-in"],ready:["Work ready","st-ready"],check:["Check hand-in","st-check"]};
+const L=document.getElementById('list');let F='all',S='order';
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function render(){
+  let rows=A.filter(a=>F==='all'||a[1]===F);
+  if(S==='az')rows=rows.slice().sort((a,b)=>a[2].localeCompare(b[2]));
+  L.innerHTML=rows.map(([n,c,t,d,tags,due,hin,pts,st,files])=>`<div class="item">
+    <div class="num">ASSIGNMENT ${n}<br><span class="${c}">${c.toUpperCase()}</span></div>
+    <div><h3>${esc(t)}</h3>
+      <div class="meta">${due?`<span>Due <b>${due}</b></span>`:''}${hin?`<span>Handed in <b>${hin}</b></span>`:''}${pts?`<span><b>${pts}</b> points</span>`:''}</div>
+      <p>${esc(d)}</p><div class="tags">${tags.map(x=>`<span>${esc(x)}</span>`).join('')}</div>
+      <ul class="files">${files.map(([k,l,u])=>`<li><span>${k}</span>${u?`<a href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`:`<code>${esc(l)}</code>`}</li>`).join('')}</ul></div>
+    <div class="side"><span class="status ${ST[st][1]}">${ST[st][0]}</span></div>
+  </div>`).join('');
+  const k=A.filter(a=>a[8]==='in').length;document.getElementById('doneCount').textContent=k;
+  document.getElementById('progText').textContent=`${k} of ${A.length} hand-ins confirmed`;
+  document.getElementById('progBar').style.width=(k/A.length*100)+'%';
+}
+function wire(attr,set){document.querySelectorAll(`[data-${attr}]`).forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll(`[data-${attr}]`).forEach(x=>x.setAttribute('aria-pressed',x===b));set(b.dataset[attr]);render()}))}
+wire('f',v=>F=v);wire('s',v=>S=v);render();
+</script>
